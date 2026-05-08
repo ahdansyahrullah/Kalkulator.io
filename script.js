@@ -10,12 +10,13 @@ themeBtn.addEventListener('click', () => {
 
 // 2. Tambah Karakter ke Layar
 function appendValue(val) {
-    // Validasi: Cegah operator di awal (kecuali angka/kurung)
+    // Validasi sederhana: input tidak boleh kosong di awal jika bukan angka atau kurung
     if (currentInput === "" && isNaN(val) && val !== '(') return;
     
     currentInput += val;
     updateDisplay();
-    autoCalculate(); // Perhitungan real-time
+    
+    // Hasil real-time dihapus agar tidak muncul otomatis
 }
 
 // 3. Hapus Layar
@@ -30,30 +31,27 @@ function updateDisplay() {
     expressionDiv.innerText = currentInput || "0";
 }
 
-// 5. Perhitungan Real-time (Opsional sesuai instruksi c)
-function autoCalculate() {
-    try {
-        if (currentInput !== "" && !isNaN(currentInput.slice(-1))) {
-            let tempRes = eval(currentInput.replace('×', '*').replace('÷', '/'));
-            resultDiv.innerText = tempRes;
-        }
-    } catch (e) {
-        // Abaikan error saat mengetik (ekspresi belum selesai)
-    }
-}
-
-// 6. Tombol Sama Dengan (=)
+// 5. Kalkulasi HANYA saat tombol "=" diklik
 function calculate() {
     if (currentInput === "") {
         alert("Input tidak boleh kosong!");
         return;
     }
+    
     try {
-        let finalRes = eval(currentInput);
+        // Ganti simbol visual ke operator matematika
+        let formula = currentInput.replace(/×/g, '*').replace(/÷/g, '/');
+        
+        // Melakukan perhitungan
+        let finalRes = eval(formula);
+        
+        // Tampilkan hasil di baris bawah
         resultDiv.innerText = finalRes;
-        currentInput = finalRes.toString();
+        
+        // Opsional: Jika ingin hasil naik ke atas untuk perhitungan selanjutnya
+        // currentInput = finalRes.toString(); 
     } catch (e) {
-        alert("Input tidak valid!");
+        alert("Format input salah!");
         clearDisplay();
     }
 }
