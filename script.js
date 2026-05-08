@@ -1,57 +1,56 @@
 const expressionDiv = document.getElementById('expression');
 const resultDiv = document.getElementById('result');
 const themeBtn = document.getElementById('theme-btn');
+const themeIcon = document.getElementById('theme-icon');
 let currentInput = "";
 
-// 1. Fungsi Ganti Tema
+// 1. Ganti Tema + Ganti Ikon
 themeBtn.addEventListener('click', () => {
     document.body.classList.toggle('dark-mode');
+    
+    if (document.body.classList.contains('dark-mode')) {
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+    } else {
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+    }
 });
 
-// 2. Tambah Karakter ke Layar
+// 2. Input Angka & Operator
 function appendValue(val) {
-    // Validasi sederhana: input tidak boleh kosong di awal jika bukan angka atau kurung
-    if (currentInput === "" && isNaN(val) && val !== '(') return;
+    // Reset hasil jika ingin mulai hitungan baru setelah klik =
+    if (resultDiv.innerText !== "") {
+        currentInput = "";
+        resultDiv.innerText = "";
+    }
     
     currentInput += val;
-    updateDisplay();
-    
-    // Hasil real-time dihapus agar tidak muncul otomatis
+    expressionDiv.innerText = currentInput;
 }
 
-// 3. Hapus Layar
+// 3. Clear Layar
 function clearDisplay() {
     currentInput = "";
-    updateDisplay();
+    expressionDiv.innerText = "0";
     resultDiv.innerText = "";
 }
 
-// 4. Update Teks Layar
-function updateDisplay() {
-    expressionDiv.innerText = currentInput || "0";
-}
-
-// 5. Kalkulasi HANYA saat tombol "=" diklik
+// 4. Hitung (Hanya saat klik =)
 function calculate() {
-    if (currentInput === "") {
-        alert("Input tidak boleh kosong!");
-        return;
-    }
-    
+    if (currentInput === "") return;
+
     try {
-        // Ganti simbol visual ke operator matematika
-        let formula = currentInput.replace(/×/g, '*').replace(/÷/g, '/');
-        
-        // Melakukan perhitungan
+        // Ganti simbol visual ke operator mesin
+        let formula = currentInput.replace(/×/g, '*').replace(/÷/g, '/').replace(/%/g, '/100');
         let finalRes = eval(formula);
         
-        // Tampilkan hasil di baris bawah
+        // Cek jika hasilnya desimal panjang, bulatkan 4 angka di belakang koma
+        if (!Number.isInteger(finalRes)) {
+            finalRes = parseFloat(finalRes.toFixed(4));
+        }
+
         resultDiv.innerText = finalRes;
-        
-        // Opsional: Jika ingin hasil naik ke atas untuk perhitungan selanjutnya
-        // currentInput = finalRes.toString(); 
     } catch (e) {
-        alert("Format input salah!");
-        clearDisplay();
+        resultDiv.innerText = "Error";
+        setTimeout(clearDisplay, 1500);
     }
 }
