@@ -1,24 +1,24 @@
 :root {
     --bg-color: #e0e0e0;
     --calc-bg: #f0f0f0;
-    --text-color: #333;
+    --text-color: #444;
     --display-bg: linear-gradient(45deg, #ff9a00, #ff00ff);
-    --btn-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff;
-    --btn-active: inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff;
-    --num-btn: #ffffff;
+    --btn-shadow: 6px 6px 12px #bebebe, -6px -6px 12px #ffffff;
+    --btn-active: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #ffffff;
+    --num-btn: #f8f8f8;
 }
 
 .dark-mode {
     --bg-color: #1a1a1a;
     --calc-bg: #2d2d2d;
-    --text-color: #fff;
-    --display-bg: #1a1a1a;
-    --btn-shadow: 5px 5px 10px #151515, -5px -5px 10px #454545;
-    --btn-active: inset 5px 5px 10px #151515, inset -5px -5px 10px #454545;
-    --num-btn: #262626;
+    --text-color: #eee;
+    --display-bg: #222;
+    --btn-shadow: 6px 6px 12px #181818, -6px -6px 12px #424242;
+    --btn-active: inset 4px 4px 8px #181818, inset -4px -4px 8px #424242;
+    --num-btn: #333;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 
 body {
     background-color: var(--bg-color);
@@ -26,78 +26,60 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    transition: 0.3s;
+    transition: background 0.4s ease;
 }
 
 .calculator {
-    width: 350px;
+    width: 340px;
     background: var(--calc-bg);
-    padding: 20px;
-    border-radius: 30px;
+    padding: 25px;
+    border-radius: 40px;
     box-shadow: var(--btn-shadow);
 }
 
+/* User Identity */
+.user-info { text-align: center; margin-bottom: 10px; }
+.user-info h3 { font-size: 0.95rem; color: var(--text-color); }
+.user-info p { font-size: 0.75rem; color: var(--text-color); opacity: 0.6; }
+
+/* Toggle Mode */
+.mode-toggle { display: flex; justify-content: center; margin-bottom: 20px; }
+#theme-btn {
+    width: 45px; height: 45px; border-radius: 50%; border: none;
+    background: var(--num-btn); color: var(--text-color);
+    box-shadow: var(--btn-shadow); cursor: pointer; font-size: 1.2rem;
+    display: flex; align-items: center; justify-content: center;
+}
+#theme-btn:active { box-shadow: var(--btn-active); }
+.fa-sun { color: #ff9a00; }
+.fa-moon { color: #f1c40f; }
+
+/* Display */
 .display {
     background: var(--display-bg);
-    height: 150px;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
-    padding: 20px;
-    color: white;
+    height: 120px; border-radius: 25px; margin-bottom: 25px;
+    display: flex; flex-direction: column; justify-content: center;
+    align-items: flex-end; padding: 20px; color: white;
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.2);
 }
+#expression { font-size: 1.2rem; opacity: 0.7; overflow: hidden; }
+#result { font-size: 2.2rem; font-weight: bold; }
 
-#expression { font-size: 1.5rem; opacity: 0.8; }
-#result { font-size: 2.5rem; font-weight: bold; }
-
-.keypad {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-}
-
+/* Buttons */
+.keypad { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
 .btn {
-    height: 60px;
-    border-radius: 15px;
-    border: none;
-    background: var(--num-btn);
-    color: var(--text-color);
-    font-size: 1.2rem;
-    cursor: pointer;
-    box-shadow: var(--btn-shadow);
-    transition: all 0.2s;
+    height: 60px; border-radius: 18px; border: none;
+    background: var(--num-btn); color: var(--text-color);
+    font-size: 1.1rem; font-weight: 600; cursor: pointer;
+    box-shadow: var(--btn-shadow); transition: 0.2s;
 }
-
-.btn:active { box-shadow: var(--btn-active); }
-
+.btn:active { box-shadow: var(--btn-active); transform: scale(0.98); }
 .btn.func { color: #ff5e5e; }
-.btn.equal {
-    background: linear-gradient(45deg, #ff9a00, #ff00ff);
-    color: white;
-}
-.user-info {
-    text-align: center;
-    padding-top: 10px;
-    margin-bottom: 5px;
-}
+.btn.op { color: #5e97ff; }
+.btn.equal { background: var(--display-bg); color: white; }
 
-.user-info h3 {
-    font-size: 1rem;
-    color: var(--text-color); /* Ikut ganti warna saat Dark Mode */
-    margin: 0;
-}
-
-.user-info p {
-    font-size: 0.8rem;
-    color: var(--text-color);
-    opacity: 0.7; /* Membuat NIM sedikit lebih tipis/halus */
-    margin: 0;
-}
 /* Responsive */
-@media (max-width: 400px) {
+@media (max-width: 380px) {
     .calculator { width: 90%; }
-    .btn { height: 50px; }
+    .btn { height: 55px; }
 }
