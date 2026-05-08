@@ -78,7 +78,24 @@ body {
     background: linear-gradient(45deg, #ff9a00, #ff00ff);
     color: white;
 }
+.user-info {
+    text-align: center;
+    padding-top: 10px;
+    margin-bottom: 5px;
+}
 
+.user-info h3 {
+    font-size: 1rem;
+    color: var(--text-color); /* Ikut ganti warna saat Dark Mode */
+    margin: 0;
+}
+
+.user-info p {
+    font-size: 0.8rem;
+    color: var(--text-color);
+    opacity: 0.7; /* Membuat NIM sedikit lebih tipis/halus */
+    margin: 0;
+}
 /* Responsive */
 @media (max-width: 400px) {
     .calculator { width: 90%; }
