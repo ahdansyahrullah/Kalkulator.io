@@ -3,19 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalkulator Neumorphism</title>
+    <title>Kalkulator Neumorphism - Ahdan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="light-mode">
-  <div class="calculator">
-    <div class="user-info">
-        <h3>Muhammad Ahdan Syahrullah</h3>
-        <p>NIM: 231011450346</p> </div>
+    <div class="calculator">
+        <div class="user-info">
+            <h3>Muhammad Ahdan Syahrullah</h3>
+            <p>NIM: 231011450346</p> 
+        </div>
 
-    <div class="mode-toggle">
-        <button id="theme-btn">Toggle Dark/Light</button>
-    </div>
-      
+        <div class="mode-toggle">
+            <button id="theme-btn">
+                <i id="theme-icon" class="fas fa-sun"></i>
+            </button>
+        </div>
+
         <div class="display">
             <div id="expression">0</div>
             <div id="result"></div>
@@ -42,9 +46,9 @@
             <button class="btn num" onclick="appendValue('3')">3</button>
             <button class="btn op" onclick="appendValue('+')">+</button>
 
-            <button class="btn num" onclick="appendValue('+/-')">+/-</button>
-            <button class="btn num" onclick="appendValue('0')">0</button>
             <button class="btn num" onclick="appendValue('.')">.</button>
+            <button class="btn num" onclick="appendValue('0')">0</button>
+            <button class="btn num" onclick="appendValue('00')">00</button>
             <button class="btn equal" onclick="calculate()">=</button>
         </div>
     </div>
